@@ -12,6 +12,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from reminders_bot import events
 from reminders_bot.routines import (
     TELEGRAM_GROUP_ID,
     setup_daily_routine,
@@ -41,9 +42,9 @@ async def happy_thursday(context: CallbackContext) -> None:
 
 
 async def daily_routine(context: CallbackContext) -> None:
-    await context.bot.send_message(
-        TELEGRAM_GROUP_ID, text="This is the daily routine running at 00:00!"
-    )
+    message_text = events.get_event()
+    if message_text != "":
+        await context.bot.send_message(TELEGRAM_GROUP_ID, text=message_text)
 
 
 def main() -> None:
