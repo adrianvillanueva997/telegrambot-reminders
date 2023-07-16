@@ -55,5 +55,3 @@ def get_event():
             match day:
                 case 1:
                     pass
-        case _:
-            print("The language doesn't matter, what matters is solving problems.")
