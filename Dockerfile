@@ -21,7 +21,9 @@ RUN poetry config virtualenvs.create false \
 
 # Second stage
 FROM python:3.11.4-slim-buster AS prod
-
+RUN apt-get update \
+    && apt-get install -y make  \
+    && rm -rf /var/lib/apt/lists/*
 # Copy installed dependencies from previous stage
 COPY --from=build-env /usr/local /usr/local
 
