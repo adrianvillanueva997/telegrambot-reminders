@@ -16,21 +16,9 @@ COPY pyproject.toml poetry.lock /app/
 
 # Install dependencies in a virtual environment
 WORKDIR /app
-RUN poetry config virtualenvs.create false \
+RUN poetry config virtualenvs.create true \
     && poetry install --no-root --no-dev
 
-# Second stage
-FROM python:3.11.4-slim-buster AS prod
-RUN apt-get update \
-    && apt-get install -y  make \
-    && rm -rf /var/lib/apt/lists/*
-# Copy installed dependencies from previous stage
-COPY --from=build-env /usr/local /usr/local
-
-# Copy project files
-WORKDIR /app
 COPY . .
 
-# Expose port and set command
-EXPOSE 2112
 CMD ["make", "prod"]
