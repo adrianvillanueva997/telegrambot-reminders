@@ -2,7 +2,7 @@
 # build-env -> prod
 
 FROM python:3.11.4-slim-buster AS build-env
-
+WORKDIR /app
 # Install build dependencies
 RUN apt-get update \
     && apt-get install -y build-essential python-pkg-resources \
@@ -12,13 +12,10 @@ RUN apt-get update \
 RUN pip install --upgrade --no-cache-dir pip &&  pip install --no-cache-dir poetry
 
 # Copy only the dependency files
-COPY pyproject.toml poetry.lock /app/
+COPY . .
 
 # Install dependencies in a virtual environment
-WORKDIR /app
-RUN poetry config virtualenvs.create true \
-    && poetry install --no-root --no-dev
 
-COPY . .
+RUN poetry install
 
 CMD ["make", "prod"]
