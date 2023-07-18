@@ -5,7 +5,7 @@ FROM python:3.11.4-slim-buster AS build-env
 
 # Install build dependencies
 RUN apt-get update \
-    && apt-get install -y build-essential python-pkg-resources  \
+    && apt-get install -y build-essential python-pkg-resources ffmpeg flac \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
@@ -22,7 +22,7 @@ RUN poetry config virtualenvs.create false \
 # Second stage
 FROM python:3.11.4-slim-buster AS prod
 RUN apt-get update \
-    && apt-get install -y make  \
+    && apt-get install -y  make \
     && rm -rf /var/lib/apt/lists/*
 # Copy installed dependencies from previous stage
 COPY --from=build-env /usr/local /usr/local
