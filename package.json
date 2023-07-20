@@ -1,0 +1,23 @@
+{
+  "name": "telegram_reminders_bot",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "git@github.com:adrianvillanueva997/telegram_reminders_bot.git",
+  "author": "adrianvillanueva997 <adrianvillanueva997@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-schedule": "^2.1.1",
+    "node-telegram-bot-api": "^0.61.0"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "prod": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node-schedule": "^2.1.0",
+    "@types/node-telegram-bot-api": "^0.61.6",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

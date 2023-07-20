@@ -1,10 +1,5 @@
-FROM python:3.11.4-slim-buster AS prod
+FROM node:19.7.0-buster AS build
+WORKDIR /build
 
-WORKDIR /app
-
-# Install dependencies
-COPY . .
-RUN pip install poetry && poetry install
-
-# Run your app
-CMD [ "poetry", "run", "python", "src/reminders_bot/main.py" ]
+COPY package.json yarn.lock ./
+RUN yarn install
