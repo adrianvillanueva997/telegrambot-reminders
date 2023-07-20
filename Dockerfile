@@ -1,5 +1,28 @@
-FROM node:19.7.0-buster AS build
+FROM node:19.7.0 AS build
+
+# Set working directory to /build
 WORKDIR /build
 
+# Copy package.json and yarn.lock first to leverage Docker cache for dependency installation
+COPY . .
+
+# Install dependencies with yarn and clean cache in one step to reduce layers
+RUN yarn install --frozen-lockfile && yarn cache clean
+RUN yarn run build
+
+# Switch to a lightweight Node.js image for runtime
+FROM node:19.7.0-slim AS runtime
+
+# Set working directory to /app
+WORKDIR /app
+
+# Copy only necessary files from the build stage
+COPY --from=build /build/node_modules ./node_modules
+COPY --from=build /build/dist ./dist
 COPY package.json yarn.lock ./
-RUN yarn install
+
+# Install production dependencies (only the necessary ones)
+RUN yarn install --frozen-lockfile --production && yarn cache clean
+
+# Start the application in production mode
+CMD ["yarn", "run", "prod"]
