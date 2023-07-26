@@ -1,4 +1,4 @@
-FROM node:20.4.0 AS build
+FROM node:20.5.0 AS build
 
 # Set working directory to /build
 WORKDIR /build
@@ -11,7 +11,7 @@ RUN yarn install --frozen-lockfile && yarn cache clean
 RUN yarn run build
 
 # Switch to a lightweight Node.js image for runtime
-FROM node:20.4.0-slim AS runtime
+FROM node:20.5.0-slim AS runtime
 
 # Set working directory to /app
 WORKDIR /app
