@@ -17,7 +17,7 @@ logger.info('Bot has been started ...');
 
 const chatId = -1001063900471;
 
-cron.scheduleJob('0 0 * * *', function () {
+cron.scheduleJob('0 0 * * 0-6', function () {
   logger.info('Running special events check ...');
   const event = check_daily_event();
   if (event != '') {
