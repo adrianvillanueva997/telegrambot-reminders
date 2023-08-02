@@ -1,6 +1,6 @@
 function check_daily_event(): string {
-  const month = new Date().getDate();
-  const day = new Date().getMonth();
+  const day = new Date().getDate();
+  const month = new Date().getMonth();
   let event = '';
   switch (month) {
     case 1:
