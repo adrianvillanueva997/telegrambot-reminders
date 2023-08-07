@@ -1021,10 +1021,10 @@ ts-node@^10.9.1:
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
 
-tslog@^4.8.2:
-  version "4.8.2"
-  resolved "https://registry.yarnpkg.com/tslog/-/tslog-4.8.2.tgz#dbb0c96249e387e8a711ae6e077330ba1ef102c9"
-  integrity sha512-eAKIRjxfSKYLs06r1wT7oou6Uv9VN6NW9g0JPidBlqQwPBBl5+84dm7r8zSOPVq1kyfEw1P6B3/FLSpZCorAgA==
+tslog@^4.8.6:
+  version "4.8.6"
+  resolved "https://registry.yarnpkg.com/tslog/-/tslog-4.8.6.tgz#99010966b8bab09f871d1f88e2fca1e74f4be187"
+  integrity sha512-aUlFTEU0PrdtIUASfzhQ4Dnz8WLjaXagPKrSeUADRqMkskZXE4p37F4LA2LWNmCD2b41bGptnsq8E1TIBeE7tg==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
