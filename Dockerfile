@@ -20,10 +20,11 @@ WORKDIR /app
 # Copy only necessary files from the build stage
 COPY --from=build /build/node_modules ./node_modules
 COPY --from=build /build/dist ./dist
-COPY package.json yarn.lock ./
+COPY package.json pnpm-lock.yaml ./
 
+RUN npm install -g pnpm
 # Install production dependencies (only the necessary ones)
-RUN yarn install --frozen-lockfile --production && yarn cache clean
 
+RUN pnpm install --frozen-lockfile --production && pnpm cache clean --force
 # Start the application in production mode
-CMD ["yarn", "run", "prod"]
+CMD ["pnpm", "run", "prod"]
