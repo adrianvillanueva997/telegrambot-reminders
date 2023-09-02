@@ -7,8 +7,9 @@ WORKDIR /build
 COPY . .
 
 # Install dependencies with yarn and clean cache in one step to reduce layers
-RUN yarn install --frozen-lockfile && yarn cache clean
-RUN yarn run build
+RUN npm install -g pnpm
+
+RUN pnpm install --frozen-lockfile && pnpm cache clean --force
 
 # Switch to a lightweight Node.js image for runtime
 FROM node:20.5.1-bullseye-slim AS runtime
