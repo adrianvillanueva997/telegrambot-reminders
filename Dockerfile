@@ -25,6 +25,6 @@ COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm
 # Install production dependencies (only the necessary ones)
 
-RUN pnpm install --frozen-lockfile --production && pnpm cache clean --force
+RUN pnpm install --frozen-lockfile --production
 # Start the application in production mode
 CMD ["pnpm", "run", "prod"]
