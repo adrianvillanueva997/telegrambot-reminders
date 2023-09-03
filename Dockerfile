@@ -9,6 +9,7 @@ COPY . .
 # Install dependencies with yarn and clean cache in one step to reduce layers
 RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
+RUN pnpm run build
 
 # Switch to a lightweight Node.js image for runtime
 FROM node:20.5.1-bullseye-slim AS runtime
