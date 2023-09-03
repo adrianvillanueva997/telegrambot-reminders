@@ -12,7 +12,8 @@ RUN yarn run build
 
 # Switch to a lightweight Node.js image for runtime
 FROM node:20.5.1-bullseye-slim AS runtime
-
+# Configure the system timezone
+RUN apt-get update && apt-get install -y tzdata && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && apt-get clean
 # Set working directory to /app
 WORKDIR /app
 
