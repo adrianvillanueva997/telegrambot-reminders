@@ -1,4 +1,4 @@
-FROM node:20.5.1 AS build
+FROM node:20.6.0 AS build
 
 # Set working directory to /build
 WORKDIR /build
@@ -12,7 +12,7 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm run build
 
 # Switch to a lightweight Node.js image for runtime
-FROM node:20.5.1-bullseye-slim AS runtime
+FROM node:20.6.0-bullseye-slim AS runtime
 # Configure the system timezone
 RUN apt-get update && apt-get install -y tzdata && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && apt-get clean
 # Set working directory to /app
