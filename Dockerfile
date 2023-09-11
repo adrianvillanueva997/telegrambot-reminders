@@ -1,4 +1,4 @@
-FROM golang:1.19.4-bullseye as build-env
+FROM golang:1.21-bullseye as build-env
 RUN apt-get update && \
     apt-get install -y make git && \
     apt-get clean && \
