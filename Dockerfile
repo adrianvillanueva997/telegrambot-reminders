@@ -18,6 +18,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 RUN adduser --disabled-password appuser
-COPY --from=build-env /build/app telegrambot_reminders
+COPY --from=build-env /build telegrambot_reminders
 USER appuser
 ENTRYPOINT ["./telegrambot_reminders"]
