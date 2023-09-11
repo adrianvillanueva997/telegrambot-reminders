@@ -1,4 +1,4 @@
-name: Build Docker image
+name: CI Pipeline for Docker and linting
 
 on:
   pull_request:
