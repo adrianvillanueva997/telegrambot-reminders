@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.1.1
     version: 2.1.1
   node-telegram-bot-api:
-    specifier: ^0.61.0
-    version: 0.61.0
+    specifier: ^0.63.0
+    version: 0.63.0
   tslog:
     specifier: ^4.9.2
     version: 4.9.2
@@ -711,8 +711,8 @@ packages:
       sorted-array-functions: 1.3.0
     dev: false
 
-  /node-telegram-bot-api@0.61.0:
-    resolution: {integrity: sha512-BZXd8Bh2C5+uBEQuuI3FD7TFJF3alV+6oFQt8CNLx3ldX/hsd+NYyllTX+Y+5X0tG+xtcRQQjbfLgz/4sRvmBQ==}
+  /node-telegram-bot-api@0.63.0:
+    resolution: {integrity: sha512-SssDLHZ+Qi7Ygwt2iKur2BBZUjRBBDxC98+ydyVZo/arUJlXz3nA6dUEYP3pjNLWW4qQJdf7OsptaUDrKTTHlg==}
     engines: {node: '>=0.12'}
     dependencies:
       array.prototype.findindex: 2.2.2
