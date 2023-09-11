@@ -1,31 +1,23 @@
-FROM node:20.6.0 AS build
-
-# Set working directory to /build
+FROM golang:1.19.4-bullseye as build-env
+RUN apt-get update && \
+    apt-get install -y make git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 WORKDIR /build
-
-# Copy package.json and yarn.lock first to leverage Docker cache for dependency installation
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
 COPY . .
+RUN go build
 
-# Install dependencies with yarn and clean cache in one step to reduce layers
-RUN npm install -g pnpm
-RUN pnpm install --frozen-lockfile
-RUN pnpm run build
-
-# Switch to a lightweight Node.js image for runtime
-FROM node:20.6.0-bullseye-slim AS runtime
-# Configure the system timezone
-RUN apt-get update && apt-get install -y tzdata && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && apt-get clean
-# Set working directory to /app
+# Executable stage
+FROM debian:11.5-slim
+RUN apt-get update && \
+    apt-get install -y ca-certificates && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 WORKDIR /app
-
-# Copy only necessary files from the build stage
-COPY --from=build /build/node_modules ./node_modules
-COPY --from=build /build/dist ./dist
-COPY package.json pnpm-lock.yaml ./
-
-RUN npm install -g pnpm
-# Install production dependencies (only the necessary ones)
-
-RUN pnpm install --frozen-lockfile --production
-# Start the application in production mode
-CMD ["pnpm", "run", "prod"]
+RUN adduser --disabled-password appuser
+COPY --from=build-env /build/app telegrambot_reminders
+USER appuser
+ENTRYPOINT ["./telegrambot_reminders"]
