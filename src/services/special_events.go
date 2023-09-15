@@ -12,7 +12,7 @@ import (
 func SpecialEvents(bot *tgbotapi.BotAPI) *gocron.Scheduler {
 	log.Info("Special events scheduler started")
 	scheduler := gocron.NewScheduler(time.UTC)
-	_, err := scheduler.Every(1).Thursday().At("00:00").Do(
+	_, err := scheduler.Every(1).Day().At("00:00").Do(
 		func() {
 			log.Info("Checking special events!")
 			event := get_event()
