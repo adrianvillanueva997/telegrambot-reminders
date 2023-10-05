@@ -4,13 +4,13 @@ go 1.21
 
 require (
 	github.com/charmbracelet/log v0.2.4
+	github.com/go-co-op/gocron v1.33.1
 	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
 )
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/lipgloss v0.8.0 // indirect
-	github.com/go-co-op/gocron v1.33.1 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/google/uuid v1.3.1 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect

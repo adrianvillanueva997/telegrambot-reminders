@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   bot:
     image: ghcr.io/adrianvillanueva997/telegrambot_reminder:latest
@@ -7,12 +7,12 @@ services:
     env_file:
       - .env
     volumes:
-      - '/etc/timezone:/etc/timezone:ro'
-      - '/etc/localtime:/etc/localtime:ro'
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     ports:
       - 2112
     labels:
-      - 'com.centurylinklabs.watchtower.enable=true'
+      - "com.centurylinklabs.watchtower.enable=true"
     networks:
       - bots
 networks:
