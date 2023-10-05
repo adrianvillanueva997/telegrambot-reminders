@@ -17,7 +17,7 @@ func SpecialEvents(bot *tgbotapi.BotAPI) *gocron.Scheduler {
 			log.Info("Checking special events!")
 			event := get_event()
 			if len(event) > 0 {
-				message := tgbotapi.NewMessage(-1001063900471, "Feliz jueves!")
+				message := tgbotapi.NewMessage(-1001063900471, event)
 				_, _ = bot.Send(message)
 			}
 
