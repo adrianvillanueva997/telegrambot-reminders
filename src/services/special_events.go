@@ -136,6 +136,9 @@ func get_event() string {
 
 		case 5:
 			message = "Felicidades al artista, maquina, fiera, crack, mastodonte @DavasJoe"
+		
+		case 7:
+			message = "Felicidades a la persona mas calmada y tranquila del grupo @txc450"
 
 		case 12:
 			message = "🇪🇸 Felis dia de Espanita 🇪🇸"
