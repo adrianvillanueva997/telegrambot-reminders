@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/charmbracelet/log v0.3.1
-	github.com/go-co-op/gocron v1.36.0
+	github.com/go-co-op/gocron v1.36.1
 	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
 )
 
