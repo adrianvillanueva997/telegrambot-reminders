@@ -12,7 +12,7 @@ COPY . .
 RUN go build && chmod +x telegrambot_reminders
 
 # Executable stage
-FROM debian:12.2-slim
+FROM debian:12.4-slim
 RUN apt-get update && \
     apt-get install -y ca-certificates && \
     apt-get clean && \
