@@ -1,15 +1,9 @@
-name: Build Docker image
+name: Build and push Docker image and release
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - "Dockerfile"
-      - "src/**"
-      - "go.mod"
-      - "go.sum"
-      - "main.go"
+    tags:
+      - "*"
 
 env:
   REGISTRY: ghcr.io
@@ -52,7 +46,19 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: |
-            ${{ steps.meta.outputs.tags }}
-            ${{ env.REGISTRY }}/adrianvillanueva997/telegrambot_reminder:latest
+          tags: ${{ env.REGISTRY }}/adrianvillanueva997/telegrambot_reminder:latest, ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: Get current tag
+        id: current_tag
+        run: echo "::set-output name=tag::$(git describe --tags $(git rev-list --tags --max-count=1))"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+        with:
+          tag_name: ${{ steps.current_tag.outputs.tag }}
+          release_name: Release ${{ steps.current_tag.outputs.tag }}
+          draft: false
+          prerelease: false
