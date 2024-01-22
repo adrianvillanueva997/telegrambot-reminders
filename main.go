@@ -24,8 +24,8 @@ func main() {
 	if err != nil {
 		log.Error("Error getting updates", err)
 	}
-	services.Thursday(bot).StartAsync()
-	services.SpecialEvents(bot).StartAsync()
+	services.Thursday(bot).Start()
+	services.SpecialEvents(bot).Start()
 	for update := range updates {
 		if update.Message == nil {
 			continue

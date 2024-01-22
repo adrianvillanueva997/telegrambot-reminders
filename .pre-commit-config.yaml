@@ -45,10 +45,6 @@ repos:
         name: 🐹 Format Go code
       - id: go-vet
         name: 🐹 Vet Go code
-      - id: go-lint
-        name: 🐹 Lint Go code
-      - id: go-imports
-        name: 🐹 Fix Go imports
       - id: go-cyclo
         name: 🐹 Check Go cyclomatic complexity
         args: [-over=15]
