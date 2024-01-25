@@ -103,13 +103,13 @@ func get_event() string {
 
 	case 6:
 		if day == 1 {
-			message = "Junio. En junio, el que no trabaja no tiene dinero ni tiene amigo."
+			message = "En junio, el que no trabaja no tiene dinero ni tiene amigo."
 		}
 
 	case 7:
 		switch day {
 		case 1:
-			message = "Julio. El que en julio no trabaja, ni pobre ni rico se halla."
+			message = "El que en julio no trabaja, ni pobre ni rico se halla."
 
 		case 8:
 			message = "Felicidades @sanz97xx! (Menudo gilipollas)"
@@ -119,17 +119,17 @@ func get_event() string {
 	case 8:
 		switch day {
 		case 1:
-			message = "Agosto. Agua en agosto, hielo en el mosto."
+			message = "Agua en agosto, hielo en el mosto."
 
 		case 2:
-			message = "Felicidades al mas guapo, grande, hermoso y seductor, @Sauturn"
+			message = "Felicidades al mas guapo, grande, hermoso y seductor @Sauturn"
 
 		}
 
 	case 9:
 		switch day {
 		case 1:
-			message = "Septiembre. Septiembre, o seca las fuentes o se lleva los puentes."
+			message = "Septiembre, o seca las fuentes o se lleva los puentes."
 
 		case 11:
 			message = "Felicidades Torres Gemelas!"
@@ -171,7 +171,7 @@ func get_event() string {
 	case 12:
 		switch day {
 		case 1:
-			message = "Diciembre. En diciembre, ni se coge el frío ni se deja."
+			message = "En diciembre, ni se coge el frío ni se deja."
 
 		case 25:
 			message = "Feliz navidad!"
