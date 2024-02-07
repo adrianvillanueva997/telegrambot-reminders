@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.21-bullseye as build-env
+FROM golang:1.22-bullseye as build-env
 RUN apt-get update && \
     apt-get install --no-install-recommends -y make git && \
     apt-get clean && \
