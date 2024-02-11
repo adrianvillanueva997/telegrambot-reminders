@@ -38,6 +38,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v4
       - name: Run golangci-lint
         run: golangci-lint run
