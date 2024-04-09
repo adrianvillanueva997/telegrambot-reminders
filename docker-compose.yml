@@ -13,8 +13,3 @@ services:
       - 2112
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-    networks:
-      - bots
-networks:
-  bots:
-    external: true
