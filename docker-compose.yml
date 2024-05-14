@@ -1,7 +1,7 @@
 version: "3"
 services:
   bot:
-    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v0.9.0
+    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v0.10.0
     container_name: telegrambot_reminders
     restart: unless-stopped
     env_file:
