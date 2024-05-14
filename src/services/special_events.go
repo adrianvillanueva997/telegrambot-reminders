@@ -151,7 +151,7 @@ func get_event() string {
 			message = "Felicidades a la persona mas calmada y tranquila del grupo @txc450"
 
 		case 12:
-			message = "🇪🇸 Felis dia de Espanita 🇪🇸"
+			message = "🇪🇸 Felis dia de Espanita 🇪🇸 y felisidades a Andres(blu) (no tiene @ga )"
 
 		case 16:
 			message = "Feicidades al segundo mas calvo (y al mas furro) del grupo, @DarkTrainer https://www.youtube.com/watch?v=KnrKrHhqKyk"
