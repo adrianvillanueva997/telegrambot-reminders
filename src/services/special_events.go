@@ -99,6 +99,8 @@ func get_event() string {
 		case 9:
 			message = "Felicidades @Thexiao77! Y Feliz dia de la victoria camaradas!"
 
+		case 25:
+			message = "Felicidades @Garfu01 <3"
 		}
 
 	case 6:

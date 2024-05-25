@@ -3,7 +3,7 @@
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.6.0
     hooks:
       - id: check-yaml
         name: ⚙️ Check YAML
@@ -24,16 +24,8 @@ repos:
       - id: debug-statements
         name: "⚙️ Check debug statements"
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.3
-    hooks:
-      - id: prettier
-        name: 🖌️ Format code with Prettier
-        files: \.(json|markdown|md|yaml|yml)$
-        args: [--write]
-
   - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.1-beta
+    rev: v2.13.0-beta
     hooks:
       - id: hadolint
         name: 🐳 Lint Dockerfiles
