@@ -1,15 +1,15 @@
-version: "3"
+version: '3'
 services:
   bot:
-    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v0.10.0
+    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v0.10.1
     container_name: telegrambot_reminders
     restart: unless-stopped
     env_file:
       - stack.env
     volumes:
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
     ports:
       - 2112
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - 'com.centurylinklabs.watchtower.enable=true'
