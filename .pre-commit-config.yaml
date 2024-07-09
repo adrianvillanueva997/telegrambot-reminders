@@ -29,22 +29,3 @@ repos:
     hooks:
       - id: hadolint
         name: 🐳 Lint Dockerfiles
-
-  - repo: https://github.com/dnephin/pre-commit-golang
-    rev: v0.5.1
-    hooks:
-      - id: go-fmt
-        name: 🐹 Format Go code
-      - id: go-vet
-        name: 🐹 Vet Go code
-      - id: go-cyclo
-        name: 🐹 Check Go cyclomatic complexity
-        args: [-over=15]
-      - id: golangci-lint
-        name: 🐹 Lint Go code with golangci-lint
-      - id: go-critic
-        name: 🐹 Lint Go code with go-critic
-      - id: go-build
-        name: 🐹 Build Go code
-      - id: go-mod-tidy
-        name: 🐹 Tidy Go modules

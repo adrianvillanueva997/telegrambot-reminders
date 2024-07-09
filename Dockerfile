@@ -1,25 +1,23 @@
-# Build stage
-FROM golang:1.22-bullseye as build-env
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y make git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-WORKDIR /build
-COPY go.mod .
-COPY go.sum .
-RUN go mod download
-COPY . .
-RUN go build && chmod +x telegrambot_reminders
+FROM node:22.4.0-bookworm-slim AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+COPY . /app
+WORKDIR /app
 
-# Executable stage
-FROM debian:12.5-slim
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run build
+
+FROM base as prod
+COPY --from=prod-deps /app/node_modules /app/node_modules
+COPY --from=build /app/dist /app/dist
 RUN apt-get update && \
     apt-get install --no-install-recommends -y ca-certificates tzdata && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /app
-RUN adduser --disabled-password appuser
-COPY --from=build-env /build/telegrambot_reminders .
-USER appuser
 ENV TZ=Europe/Madrid
-ENTRYPOINT ["./telegrambot_reminders"]
+CMD [ "pnpm", "start" ]
