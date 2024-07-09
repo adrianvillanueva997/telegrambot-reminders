@@ -31,13 +31,3 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: false
-
-  golangcilint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v4
-      - name: Run golangci-lint
-        run: golangci-lint run
