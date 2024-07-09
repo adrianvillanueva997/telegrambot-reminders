@@ -9,3 +9,5 @@ services:
       - '/etc/localtime:/etc/localtime:ro'
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
