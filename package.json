@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-    "start": "node dist/main.js",
+		"start": "node dist/main.js",
 		"build": "tsc"
 	},
 	"keywords": [],
@@ -16,6 +16,7 @@
 		"tslog": "^4.9.3"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "1.8.3",
 		"@types/node": "^20.14.10",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.5.3"
