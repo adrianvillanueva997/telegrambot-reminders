@@ -1,5 +1,9 @@
+/**
+ * Retrieves a special event message based on the current month and day.
+ * @returns The special event message for the current date.
+ */
 function getSpecialEvents(): string {
-	const month = new Date().getMonth();
+	const month = fixMonthlyDate(new Date().getMonth());
 	const day = new Date().getDate();
 	let message = "undefined";
 	switch (month) {
@@ -171,6 +175,20 @@ function getSpecialEvents(): string {
 			break;
 	}
 	return message;
+}
+
+/**
+ * Fixes the monthly date by adding 1 to the given month.
+ * If the month is 0, it returns 1.
+ *
+ * @param month - The month to be fixed.
+ * @returns The fixed monthly date.
+ */
+function fixMonthlyDate(month: number): number {
+	if (month === 0) {
+		return 1;
+	}
+	return month + 1;
 }
 
 export { getSpecialEvents };
