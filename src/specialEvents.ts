@@ -2,179 +2,99 @@
  * Retrieves a special event message based on the current month and day.
  * @returns The special event message for the current date.
  */
-function getSpecialEvents(): string {
+
+/**
+ * Retrieves a special message based on the month and day.
+ * @returns An object containing special messages for each month and day.
+ */
+function getSpecialMessage(): Record<number, Record<number, string>> {
+	return {
+		1: {
+			// Enero
+			1: "¡Enero comienza! Año nuevo, ponte los guantes y abrígate el huevo 🍳",
+			6: "Hoy vienen los reyes con corona y brillo, pero el que se lleva la rosca es tu bolsillo 👑",
+			30: "Felicidades @LilNarwhal 🎉 ¡Que te celebren más que a la cuesta de enero!",
+		},
+		2: {
+			// Febrero
+			1: "Febrero viene corto pero intenso, ¡ponte romántico o vas al censo! ❤️",
+			7: "Felicidades @JoseAwe! 🎉 ¡Que tu cumpleaños dure más que el mes de febrero!",
+			14: "Sam va Lentin llegó",
+			26: "Felicidades @thedrvd! 🎉 ¡Sigue siendo tan fabuloso como siempre!",
+		},
+		3: {
+			// Marzo
+			1: "Marzo loco y abril poco, abrígate antes de quedarte hecho un moco 🤧",
+			8: "¡Feliz día de la mujer! Pero cuidado, que hoy mandan ellas 🌹 (no)",
+			17: "San Patricio está aquí, échate una cerveza y di ¡sláinte! 🍀",
+		},
+		4: {
+			// Abril
+			1: "Abril con lluvias y más de una broma, pero tranquilo, la primavera te corona 🌸",
+			20: "¡Feliz día de los porros! 🌿 Si ves unicornios, no es culpa mía 🦄",
+		},
+		5: {
+			// Mayo
+			1: "En mayo las flores están de fiesta, y la alergia te invita a una siesta 🤧",
+			4: "Felicidades @R3DMSR, y que la fuerza te acompañe hoy y siempre 🎉",
+			6: "Felicidades @DoctorMckay 🎉 ¡Que tu día sea más épico que una película de Marvel!",
+			8: "Hoy es el día de Motorhead 🤘, ¡así que a romper cuellos con buen metal!",
+			9: "Felicidades @Thexiao77 y feliz Día de la Victoria 🎉 ¡Brindemos con vodka camarada! 🍸",
+			25: "Felicidades @Garfu01 <3 ¡Hoy eres más irresistible que un meme viral!",
+		},
+		6: {
+			// Junio
+			1: "Junio llega caliente, pero no te preocupes, ¡tienes tiempo para ser decente! 🌞",
+		},
+		7: {
+			// Julio
+			1: "En julio el sol quema fuerte, y el aire acondicionado es nuestra suerte 🥵",
+			8: "Felicidades @sanz97xx! 🎉 ¡Que tu día sea tan épico como tus errores gramaticales!",
+			20: "¡Feliz día del amigo! (Si tienes uno, claro) 😜",
+		},
+		8: {
+			// Agosto
+			1: "Agosto está aquí, con calor a morir, ¡pero no te derritas en tu porvenir! 🌞",
+			2: "Felicidades al más guapo y seductor, @Sauturn 🎉 ¡No sabemos cómo lo haces, pero lo haces bien!",
+		},
+		9: {
+			// Septiembre
+			1: "Se acabó la playita, septiembre te obliga a ponerte la ropita 😢",
+			11: "Felicidades torres gemelas 🎉 ¡Que no te derrumbes este año!",
+			15: "Felicidades @CecilioGil 🎉 ¡Que tu día sea tan legendario como tú!",
+		},
+		10: {
+			// Octubre
+			1: "💀 SpookTober 💀 Octubre te asusta, pero el dulce es quien te gusta 🍬",
+			5: "Felicidades al crack @DavasJoe 🎉 ¡Eres más grande que !",
+			7: "Felicidades @txc450 🎉 ¡El más tranquilo, aunque tu estrés diga lo contrario!",
+			12: "🇪🇸 ¡Feliz día de la Hispanidad! 🇪🇸 Y a Andres(blu), que no tiene @, también 🎉",
+			16: "Felicidades @DarkTrainer 🎉 ¡Eres tan calvo y peludo como nunca!",
+			31: "Feliz Halloween 🎃",
+		},
+		11: {
+			// Noviembre
+			1: "⛔💦 No Fap November empieza, ¡así que manos quietas! 🙈",
+			20: "Se ha matado Paco",
+		},
+		12: {
+			// Diciembre
+			1: "Diciembre trae regalos y fiestas, pero no te comas todo o te arrepentirás en la cuesta 🎁",
+			25: "Feliz navidad 🎄 ¡Que el gordo barbudo te traiga lo que mereces!",
+		},
+	};
+}
+
+function getMessage(month: number, day: number): string | null {
+	const messages = getSpecialMessage();
+	return messages[month]?.[day] || null;
+}
+
+function getSpecialEvents(): string | null {
 	const month = fixMonthlyDate(new Date().getMonth());
 	const day = new Date().getDate();
-	let message = "undefined";
-	switch (month) {
-		case 1:
-			switch (day) {
-				case 1:
-					message = "Feliz año nuevo! 🎉";
-					break;
-				case 6:
-					message = "Feliz día de reyes! 👑";
-					break;
-				case 30:
-					message = "Felicidades @LilNarwhal 🎉";
-					break;
-			}
-			break;
-		case 2:
-			switch (day) {
-				case 1:
-					message = "Febrero febrerin el mas corto y el mas ruin ";
-					break;
-				case 7:
-					message = "Feicidades @JoseAwe! 🎉";
-					break;
-				case 14:
-					message = "Sam va lentin 🌹";
-					break;
-				case 26:
-					message = "Felicidades @thedrvd! 🎉";
-					break;
-			}
-			break;
-		case 3:
-			switch (day) {
-				case 1:
-					message = "Marszo ";
-					break;
-				case 8:
-					message = "Feliz día de la mujer! 🌹";
-					break;
-				case 17:
-					message = "Feliz día de San Patricio! 🍀";
-					break;
-			}
-			break;
-		case 4:
-			switch (day) {
-				case 1:
-					message = "Abril abrilero, cada día un chaparrón y un sombrero";
-					break;
-				case 20:
-					message = "Feliz dia de los porros! 🌿";
-					break;
-			}
-			break;
-		case 5:
-			switch (day) {
-				case 1:
-					message = "En mayo, cada día un huevo y dos en el domingo";
-					break;
-				case 4:
-					message = "Felicidades @R3DMSR y feliz dia de Star Wars! 🎉";
-					break;
-				case 6:
-					message = "Felicidades @DoctorMckay! 🎉";
-					break;
-				case 8:
-					message = "Feliz dia de Motorhead! 🤘";
-					break;
-				case 9:
-					message =
-						"Felicidades @Thexiao77! Y Feliz dia de la victoria camaradas! 🎉";
-					break;
-				case 25:
-					message = "Felicidades @Garfu01 <3 <3 <3";
-			}
-			break;
-		case 6:
-			switch (day) {
-				case 1:
-					message =
-						"En junio, el que no trabaja no tiene dinero ni tiene amigo";
-					break;
-			}
-			break;
-		case 7:
-			switch (day) {
-				case 1:
-					message = "Julio";
-					break;
-				case 8:
-					message = "Felicidades @sanz97xx! (Menudo gilipollas) 🎉";
-					break;
-				case 20:
-					message = "Feliz dia del amigo! (para los que tengan)";
-					break;
-			}
-			break;
-		case 8:
-			switch (day) {
-				case 1:
-					message = "Agosto";
-					break;
-				case 2:
-					message =
-						"Felicidades al mas guapo, grande, hermoso y seductor @Sauturn 🎉";
-					break;
-			}
-			break;
-		case 9:
-			switch (day) {
-				case 1:
-					message = "Septiembre";
-					break;
-				case 11:
-					message = "Felicidades torres gemelas! 🎉";
-					break;
-				case 15:
-					message = "Felicidades @CecilioGil! 🎉";
-					break;
-			}
-			break;
-		case 10:
-			switch (day) {
-				case 1:
-					message = "💀 SpookTober 💀";
-					break;
-				case 5:
-					message =
-						"Felicidades al artista, maquina, fiera, crack, mastodonte @DavasJoe 🎉";
-					break;
-				case 7:
-					message =
-						"Felicidades a la persona mas calmada y tranquila del grupo @txc450 🎉";
-					break;
-				case 12:
-					message =
-						"🇪🇸 Felis dia de Espanita 🇪🇸 y felisidades a Andres(blu) (no tiene @ )";
-					break;
-				case 16:
-					message =
-						"Feicidades al segundo mas calvo (y al mas furro) del grupo, @DarkTrainer https://www.youtube.com/watch?v=KnrKrHhqKyk 🎉";
-					break;
-				case 31:
-					message = "Feliz Halloween! 🎃";
-					break;
-			}
-			break;
-		case 11:
-			switch (day) {
-				case 1:
-					message =
-						"⛔💦 Queda inaugurada la temporada de No Fap November ⛔💦";
-					break;
-				case 20:
-					message = "Ha muerto Maradona";
-					break;
-			}
-			break;
-		case 12:
-			switch (day) {
-				case 1:
-					message = "Diciembre. ";
-					break;
-				case 25:
-					message = "Feliz navidad! 🎄🎅🎁";
-					break;
-			}
-			break;
-	}
-	return message;
+
+	return getMessage(month, day);
 }
 
 /**

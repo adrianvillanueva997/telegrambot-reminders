@@ -20,7 +20,7 @@ const thursdayJob = new CronJob("0 0 0 * * 4", async () => {
 const specialEventsJob = new CronJob("0 0 * * 0-6", async () => {
 	log.info("Checking for special events");
 	const specialEvent = getSpecialEvents();
-	if (specialEvent !== "undefined") {
+	if (specialEvent !== null) {
 		await bot.telegram.sendMessage(telegramGroupId, specialEvent);
 	}
 });
