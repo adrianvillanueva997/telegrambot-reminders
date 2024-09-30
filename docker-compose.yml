@@ -4,7 +4,6 @@ services:
     container_name: telegrambot_reminders
     restart: unless-stopped
     volumes:
-      - '/etc/timezone:/etc/timezone:ro'
       - '/etc/localtime:/etc/localtime:ro'
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'

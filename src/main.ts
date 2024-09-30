@@ -12,18 +12,30 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 log.info("Bot started");
 const telegramGroupId = "-1001063900471";
 
-const thursdayJob = new CronJob("0 0 0 * * 4", async () => {
-	log.info("It is Thursday my dudes");
-	await bot.telegram.sendMessage(telegramGroupId, "Feliz jueves! 🐸");
-});
+const thursdayJob = new CronJob(
+	"0 0 0 * * 4",
+	async () => {
+		log.info("It is Thursday my dudes");
+		await bot.telegram.sendMessage(telegramGroupId, "Feliz jueves! 🐸");
+	},
+	null,
+	true,
+	"Europe/Madrid",
+);
 
-const specialEventsJob = new CronJob("0 0 * * 0-6", async () => {
-	log.info("Checking for special events");
-	const specialEvent = getSpecialEvents();
-	if (specialEvent !== null) {
-		await bot.telegram.sendMessage(telegramGroupId, specialEvent);
-	}
-});
+const specialEventsJob = new CronJob(
+	"0 0 * * 0-6",
+	async () => {
+		log.info("Checking for special events");
+		const specialEvent = getSpecialEvents();
+		if (specialEvent !== null) {
+			await bot.telegram.sendMessage(telegramGroupId, specialEvent);
+		}
+	},
+	null,
+	true,
+	"Europe/Madrid",
+);
 
 thursdayJob.start();
 specialEventsJob.start();
