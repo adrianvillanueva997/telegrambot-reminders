@@ -1,4 +1,3 @@
-version: '3'
 services:
   bot:
     image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v1.0.4
