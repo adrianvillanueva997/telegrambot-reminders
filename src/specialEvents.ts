@@ -49,7 +49,7 @@ function getSpecialMessage(): Record<number, Record<number, string>> {
 		7: {
 			// Julio
 			1: "En julio el sol quema fuerte, y el aire acondicionado es nuestra suerte 🥵",
-			8: "Felicidades @sanz97xx! 🎉 ¡Que tu día sea tan épico como tus errores gramaticales!",
+			8: "Felicidades @sanz97xx! 🎉 ¡Que tu día sea tan épico como tus errores matematicos!",
 			20: "¡Feliz día del amigo! (Si tienes uno, claro) 😜",
 		},
 		8: {
@@ -66,7 +66,7 @@ function getSpecialMessage(): Record<number, Record<number, string>> {
 		10: {
 			// Octubre
 			1: "💀 SpookTober 💀 Octubre te asusta, pero el dulce es quien te gusta 🍬",
-			5: "Felicidades al crack @DavasJoe 🎉 ¡Eres más grande que !",
+			5: "Felicidades al crack @DavasJoe 🎉 ¡Eres el mas grande, fiera, monstro, mastodonte y tal!",
 			7: "Felicidades @txc450 🎉 ¡El más tranquilo, aunque tu estrés diga lo contrario!",
 			12: "🇪🇸 ¡Feliz día de la Hispanidad! 🇪🇸 Y a Andres(blu), que no tiene @, también 🎉",
 			16: "Felicidades @DarkTrainer 🎉 ¡Eres tan calvo y peludo como nunca!",
