@@ -11,14 +11,14 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"cron": "^3.1.7",
+		"cron": "^3.3.1",
 		"telegraf": "^4.16.3",
 		"tslog": "^4.9.3"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
-		"@types/node": "^20.16.5",
+		"@types/node": "^20.17.10",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.5.4"
+		"typescript": "^5.7.2"
 	}
 }
