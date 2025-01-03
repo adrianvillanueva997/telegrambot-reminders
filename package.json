@@ -1,15 +1,24 @@
 {
-	"name": "test",
+	"name": "telegrambot-reminders",
 	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
+	"description": "A simple telegram bot that sends reminders to a private group chat",
+	"main": "dist/main.js",
+	"type": "commonjs",
+	"engines": {
+		"node": ">=16.0.0"
+	},
 	"scripts": {
 		"start": "node dist/main.js",
-		"build": "tsc"
+		"build": "tsc",
+		"dev": "ts-node src/main.ts",
+		"clean": "rm -rf dist",
+		"prebuild": "npm run clean",
+		"lint": "biome check .",
+		"format": "biome format . --write"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
+	"keywords": ["telegram", "bot", "reminders", "cron"],
+	"author": "adrianvillanueva997",
+	"license": "GPL-3.0",
 	"dependencies": {
 		"cron": "^3.3.1",
 		"telegraf": "^4.16.3",
