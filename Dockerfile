@@ -39,8 +39,11 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
 
 # Production stage
 FROM base AS prod
+COPY package.json ./
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+
+RUN chown -R node:node /app
 
 # Run as non-root user
 USER node
