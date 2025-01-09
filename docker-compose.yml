@@ -1,6 +1,6 @@
 services:
   bot:
-    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v1.0.7
+    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v1.0.8
     container_name: telegrambot_reminders
     restart: unless-stopped
     environment:
