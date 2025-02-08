@@ -1,5 +1,5 @@
 # Use specific node version with slim base
-FROM node:22.4.0-bookworm-slim AS base
+FROM node:23.7.0-bookworm-slim AS base
 
 # Set environment variables
 ENV PNPM_HOME="/pnpm"
