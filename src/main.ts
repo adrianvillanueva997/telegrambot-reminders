@@ -2,6 +2,7 @@ import { CronJob } from "cron";
 import { Telegraf } from "telegraf";
 import { type ILogObj, Logger } from "tslog";
 import { getSpecialEvents } from "./specialEvents";
+
 const log: Logger<ILogObj> = new Logger();
 
 if (process.env.BOT_TOKEN === undefined) {
