@@ -1,22 +1,36 @@
+import { SeverityNumber } from "@opentelemetry/api-logs/";
 import { CronJob } from "cron";
 import { Telegraf } from "telegraf";
-import { type ILogObj, Logger } from "tslog";
 import { getSpecialEvents } from "./specialEvents";
-
-const log: Logger<ILogObj> = new Logger();
+import { logger } from "./tracing";
 
 if (process.env.BOT_TOKEN === undefined) {
-	log.error("Bot token is not defined");
+	logger.emit({
+		severityNumber: SeverityNumber.INFO,
+		severityText: "ERROR",
+		body: "Bot token is not defined",
+		attributes: { "log.type": "custom" },
+	});
 	process.exit(1);
 }
 const bot = new Telegraf(process.env.BOT_TOKEN);
-log.info("Bot started");
+logger.emit({
+	severityNumber: SeverityNumber.INFO,
+	severityText: "INFO",
+	body: "Starting bot",
+	attributes: { "log.type": "custom" },
+});
 const telegramGroupId = "-1001063900471";
 
 const thursdayJob = new CronJob(
 	"0 0 0 * * 4",
 	async () => {
-		log.info("It is Thursday my dudes");
+		logger.emit({
+			severityNumber: SeverityNumber.INFO,
+			severityText: "INFO",
+			body: "Thursday event",
+			attributes: { "log.type": "custom" },
+		});
 		await bot.telegram.sendMessage(telegramGroupId, "Feliz jueves! 🐸");
 	},
 	null,
@@ -27,9 +41,20 @@ const thursdayJob = new CronJob(
 const specialEventsJob = new CronJob(
 	"0 0 * * 0-6",
 	async () => {
-		log.info("Checking for special events");
+		logger.emit({
+			severityNumber: SeverityNumber.INFO,
+			severityText: "INFO",
+			body: "Checking for daily event",
+			attributes: { "log.type": "custom" },
+		});
 		const specialEvent = getSpecialEvents();
 		if (specialEvent !== null) {
+			logger.emit({
+				severityNumber: SeverityNumber.INFO,
+				severityText: "INFO",
+				body: `Special event detected: ${specialEvent}`,
+				attributes: { "log.type": "custom" },
+			});
 			await bot.telegram.sendMessage(telegramGroupId, specialEvent);
 		}
 	},

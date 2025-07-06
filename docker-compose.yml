@@ -1,7 +1,12 @@
 services:
   bot:
     image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v1.0.9
+    networks:
+      - otlp
     container_name: telegrambot_reminders
     restart: unless-stopped
     environment:
       - BOT_TOKEN=${BOT_TOKEN}
+networks:
+  otlp:
+    external: true
