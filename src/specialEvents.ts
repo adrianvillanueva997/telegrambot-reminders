@@ -1,7 +1,6 @@
-/**
- * Retrieves a special event message based on the current month and day.
- * @returns The special event message for the current date.
- */
+import { SeverityNumber, logs } from "@opentelemetry/api-logs";
+
+const logger = logs.getLogger("special-events", "1.0.0");
 
 /**
  * Retrieves a special message based on the month and day.
@@ -116,7 +115,44 @@ function getSpecialEvents(): string | null {
 	const month = fixMonthlyDate(new Date().getMonth());
 	const day = new Date().getDate();
 
-	return getMessage(month, day);
+	logger.emit({
+		severityNumber: SeverityNumber.INFO,
+		severityText: "INFO",
+		body: `Checking special event for date: ${month}-${day}`,
+		attributes: {
+			"log.type": "event-check",
+			month,
+			day,
+		},
+	});
+
+	const message = getMessage(month, day);
+
+	if (message) {
+		logger.emit({
+			severityNumber: SeverityNumber.INFO,
+			severityText: "INFO",
+			body: `Special event found: ${message}`,
+			attributes: {
+				"log.type": "event-found",
+				month,
+				day,
+			},
+		});
+	} else {
+		logger.emit({
+			severityNumber: SeverityNumber.INFO,
+			severityText: "INFO",
+			body: "No special event found",
+			attributes: {
+				"log.type": "event-none",
+				month,
+				day,
+			},
+		});
+	}
+
+	return message;
 }
 
 /**

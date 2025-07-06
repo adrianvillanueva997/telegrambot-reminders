@@ -1,73 +1,106 @@
-import { SeverityNumber } from "@opentelemetry/api-logs/";
+import { SeverityNumber } from "@opentelemetry/api-logs";
 import { CronJob } from "cron";
 import { Telegraf } from "telegraf";
 import { getSpecialEvents } from "./specialEvents";
-import { logger } from "./tracing";
+import { initTelemetry } from "./telemetry";
 
-if (process.env.BOT_TOKEN === undefined) {
+// Async top-level scope
+(async () => {
+	const { logger } = await initTelemetry();
+
+	if (!process.env.BOT_TOKEN) {
+		logger.emit({
+			severityNumber: SeverityNumber.ERROR,
+			severityText: "ERROR",
+			body: "BOT_TOKEN is not defined in environment variables",
+			attributes: { "log.type": "init" },
+		});
+		process.exit(1);
+	}
+
+	const bot = new Telegraf(process.env.BOT_TOKEN);
+	const telegramGroupId = "-1001063900471";
+
 	logger.emit({
 		severityNumber: SeverityNumber.INFO,
-		severityText: "ERROR",
-		body: "Bot token is not defined",
-		attributes: { "log.type": "custom" },
+		severityText: "INFO",
+		body: "Starting Telegram bot...",
+		attributes: { "log.type": "startup" },
 	});
-	process.exit(1);
-}
-const bot = new Telegraf(process.env.BOT_TOKEN);
-logger.emit({
-	severityNumber: SeverityNumber.INFO,
-	severityText: "INFO",
-	body: "Starting bot",
-	attributes: { "log.type": "custom" },
-});
-const telegramGroupId = "-1001063900471";
 
-const thursdayJob = new CronJob(
-	"0 0 0 * * 4",
-	async () => {
-		logger.emit({
-			severityNumber: SeverityNumber.INFO,
-			severityText: "INFO",
-			body: "Thursday event",
-			attributes: { "log.type": "custom" },
-		});
-		await bot.telegram.sendMessage(telegramGroupId, "Feliz jueves! 🐸");
-	},
-	null,
-	true,
-	"Europe/Madrid",
-);
-
-const specialEventsJob = new CronJob(
-	"0 0 * * 0-6",
-	async () => {
-		logger.emit({
-			severityNumber: SeverityNumber.INFO,
-			severityText: "INFO",
-			body: "Checking for daily event",
-			attributes: { "log.type": "custom" },
-		});
-		const specialEvent = getSpecialEvents();
-		if (specialEvent !== null) {
+	const thursdayJob = new CronJob(
+		"0 0 0 * * 4",
+		async () => {
 			logger.emit({
 				severityNumber: SeverityNumber.INFO,
 				severityText: "INFO",
-				body: `Special event detected: ${specialEvent}`,
-				attributes: { "log.type": "custom" },
+				body: "Running Thursday scheduled job",
+				attributes: { "log.type": "cron" },
 			});
-			await bot.telegram.sendMessage(telegramGroupId, specialEvent);
-		}
-	},
-	null,
-	true,
-	"Europe/Madrid",
-);
+			await bot.telegram.sendMessage(telegramGroupId, "Feliz jueves! 🐸");
+		},
+		null,
+		false,
+		"Europe/Madrid",
+	);
 
-thursdayJob.start();
-specialEventsJob.start();
+	const specialEventsJob = new CronJob(
+		"0 0 * * 0-6",
+		async () => {
+			logger.emit({
+				severityNumber: SeverityNumber.INFO,
+				severityText: "INFO",
+				body: "Checking for daily special event",
+				attributes: { "log.type": "cron" },
+			});
 
-bot.launch();
+			const specialEvent = getSpecialEvents();
+			if (specialEvent) {
+				await bot.telegram.sendMessage(telegramGroupId, specialEvent);
+			}
+		},
+		null,
+		false,
+		"Europe/Madrid",
+	);
 
-// Enable graceful stop
-process.once("SIGINT", () => bot.stop("SIGINT"));
-process.once("SIGTERM", () => bot.stop("SIGTERM"));
+	await bot.launch();
+
+	logger.emit({
+		severityNumber: SeverityNumber.INFO,
+		severityText: "INFO",
+		body: "Telegram bot launched successfully",
+		attributes: { "log.type": "startup" },
+	});
+
+	thursdayJob.start();
+	specialEventsJob.start();
+
+	logger.emit({
+		severityNumber: SeverityNumber.INFO,
+		severityText: "INFO",
+		body: "Cron jobs started",
+		attributes: { "log.type": "startup" },
+	});
+
+	// Graceful shutdown
+	process.once("SIGINT", async () => {
+		await bot.stop("SIGINT");
+		logger.emit({
+			severityNumber: SeverityNumber.INFO,
+			severityText: "INFO",
+			body: "Bot stopped on SIGINT",
+			attributes: { "log.type": "shutdown" },
+		});
+	});
+
+	process.once("SIGTERM", async () => {
+		await bot.stop("SIGTERM");
+		logger.emit({
+			severityNumber: SeverityNumber.INFO,
+			severityText: "INFO",
+			body: "Bot stopped on SIGTERM",
+			attributes: { "log.type": "shutdown" },
+		});
+	});
+})();
