@@ -64,6 +64,8 @@ import { initTelemetry } from "./telemetry";
 		"Europe/Madrid",
 	);
 
+	thursdayJob.start();
+	specialEventsJob.start();
 	await bot.launch();
 
 	logger.emit({
@@ -72,9 +74,6 @@ import { initTelemetry } from "./telemetry";
 		body: "Telegram bot launched successfully",
 		attributes: { "log.type": "startup" },
 	});
-
-	thursdayJob.start();
-	specialEventsJob.start();
 
 	logger.emit({
 		severityNumber: SeverityNumber.INFO,
@@ -85,7 +84,7 @@ import { initTelemetry } from "./telemetry";
 
 	// Graceful shutdown
 	process.once("SIGINT", async () => {
-		await bot.stop("SIGINT");
+		bot.stop("SIGINT");
 		logger.emit({
 			severityNumber: SeverityNumber.INFO,
 			severityText: "INFO",
@@ -95,7 +94,7 @@ import { initTelemetry } from "./telemetry";
 	});
 
 	process.once("SIGTERM", async () => {
-		await bot.stop("SIGTERM");
+		bot.stop("SIGTERM");
 		logger.emit({
 			severityNumber: SeverityNumber.INFO,
 			severityText: "INFO",

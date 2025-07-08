@@ -37,7 +37,7 @@ export async function initTelemetry() {
 		instrumentations: [getNodeAutoInstrumentations()],
 	});
 
-	await sdk.start();
+	sdk.start();
 
 	const logger = logs.getLogger("tracing", "1.0.0");
 	logger.emit({
