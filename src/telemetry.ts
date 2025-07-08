@@ -13,7 +13,7 @@ import { PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
 import { NodeSDK } from "@opentelemetry/sdk-node";
 
 const OTEL_COLLECTOR_HOST =
-	process.env.OTEL_COLLECTOR_HOST || "otel-collector:4317";
+	process.env.OTEL_COLLECTOR_HOST || "http://otel-collector:4317";
 
 export async function initTelemetry() {
 	const traceExporter = new OTLPTraceExporter({ url: OTEL_COLLECTOR_HOST });
