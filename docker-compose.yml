@@ -1,6 +1,6 @@
 services:
   bot:
-    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v1.1.1
+    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:v1.1.2
     networks:
       - otlp
     container_name: telegrambot_reminders
