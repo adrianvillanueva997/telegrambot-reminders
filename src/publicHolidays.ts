@@ -1,3 +1,5 @@
+import { tomorrowDate } from "./utils";
+
 interface ILocalizedText {
 	language: string;
 	text: string;
@@ -89,9 +91,7 @@ async function getSpanishPublicHolidayTelegram(): Promise<string | null> {
 		return null;
 	}
 
-	const year = "2025";
-	const month = "03";
-	const day = "31";
+	const { year, month, day } = tomorrowDate();
 
 	const response = await fetch(
 		`https://openholidaysapi.org/PublicHolidays?countryIsoCode=ES&languageIsoCode=ES&validFrom=${year}-01-01&validTo=${year}-12-31`,
@@ -135,3 +135,5 @@ async function getSpanishPublicHolidayTelegram(): Promise<string | null> {
 
 	return null;
 }
+
+export { getSpanishPublicHolidayTelegram };

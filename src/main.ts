@@ -1,6 +1,7 @@
 import { SeverityNumber } from "@opentelemetry/api-logs";
 import { CronJob } from "cron";
 import { Telegraf } from "telegraf";
+import { getSpanishPublicHolidayTelegram } from "./publicHolidays";
 import { getSpecialEvents } from "./specialEvents";
 import { initTelemetry } from "./telemetry";
 
