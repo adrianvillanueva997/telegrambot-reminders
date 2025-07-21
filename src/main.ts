@@ -4,7 +4,6 @@ import { Telegraf } from "telegraf";
 import { getSpecialEvents } from "./specialEvents";
 import { initTelemetry } from "./telemetry";
 
-// Async top-level scope
 (async () => {
 	const { logger } = await initTelemetry();
 
@@ -44,6 +43,24 @@ import { initTelemetry } from "./telemetry";
 		"Europe/Madrid",
 	);
 
+	const publicholidaysJob = new CronJob(
+		"0 21 * * 0-6",
+		async () => {
+			logger.emit({
+				severityNumber: SeverityNumber.INFO,
+				severityText: "INFO",
+				body: "Running Public Holidays scheduled job",
+				attributes: { "log.type": "cron" },
+			});
+			const public_holiday = await getSpanishPublicHolidayTelegram();
+			if (public_holiday !== null)
+				await bot.telegram.sendMessage(telegramGroupId, public_holiday);
+		},
+		null,
+		false,
+		"Europe/Madrid",
+	);
+
 	const specialEventsJob = new CronJob(
 		"0 0 * * 0-6",
 		async () => {
@@ -66,6 +83,7 @@ import { initTelemetry } from "./telemetry";
 
 	thursdayJob.start();
 	specialEventsJob.start();
+	publicholidaysJob.start();
 	await bot.launch();
 
 	logger.emit({

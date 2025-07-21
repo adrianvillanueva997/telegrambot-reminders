@@ -16,12 +16,7 @@
 		"lint": "biome check .",
 		"format": "biome format . --write"
 	},
-	"keywords": [
-		"telegram",
-		"bot",
-		"reminders",
-		"cron"
-	],
+	"keywords": ["telegram", "bot", "reminders", "cron"],
 	"author": "adrianvillanueva997",
 	"license": "GPL-3.0",
 	"dependencies": {
@@ -46,6 +41,7 @@
 		"@biomejs/biome": "1.8.3",
 		"@types/node": "^20.19.4",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.8.3"
+		"typescript": "^5.8.3",
+		"@types/node-fetch": "^2.6.12"
 	}
 }
