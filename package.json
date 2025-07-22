@@ -39,7 +39,7 @@
 		"@opentelemetry/sdk-trace-node": "^2.0.0",
 		"@opentelemetry/semantic-conventions": "^1.36.0",
 		"@opentelemetry/winston-transport": "^0.11.0",
-		"cron": "^3.5.0",
+		"cron": "^4.0.0",
 		"telegraf": "^4.16.3"
 	},
 	"devDependencies": {
