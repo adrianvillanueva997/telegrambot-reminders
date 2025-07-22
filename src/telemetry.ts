@@ -1,14 +1,9 @@
 import { SeverityNumber, logs } from "@opentelemetry/api-logs";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
 
-import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-grpc";
 import { OTLPMetricExporter } from "@opentelemetry/exporter-metrics-otlp-grpc";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-grpc";
 
-import {
-	LoggerProvider,
-	SimpleLogRecordProcessor,
-} from "@opentelemetry/sdk-logs";
 import { PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
 import { NodeSDK } from "@opentelemetry/sdk-node";
 
@@ -18,13 +13,6 @@ const OTEL_COLLECTOR_HOST =
 export async function initTelemetry() {
 	const traceExporter = new OTLPTraceExporter({ url: OTEL_COLLECTOR_HOST });
 	const metricExporter = new OTLPMetricExporter({ url: OTEL_COLLECTOR_HOST });
-	const logExporter = new OTLPLogExporter({ url: OTEL_COLLECTOR_HOST });
-
-	const loggerProvider = new LoggerProvider();
-	loggerProvider.addLogRecordProcessor(
-		new SimpleLogRecordProcessor(logExporter),
-	);
-	logs.setGlobalLoggerProvider(loggerProvider);
 
 	const metricReader = new PeriodicExportingMetricReader({
 		exporter: metricExporter,
