@@ -6,9 +6,16 @@
     "docker:pinDigests",
     "helpers:pinGitHubActionDigests"
   ],
-
-  "dependencyDashboard": true,
+  "dependencyDashboard": false, 
   "assignees": ["adrianvillanueva997"],
-  "recreateWhen": "always",
-  "labels": ["dependencies", "renovate"]
+  "recreateWhen": "auto",
+  "labels": ["dependencies", "renovate"],
+  "automerge": true, // Enable automerge
+  "automergeType": "pr", 
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ]
 }
