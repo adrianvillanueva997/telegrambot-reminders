@@ -44,7 +44,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.1.2",
-		"@types/node": "^20.19.9",
+		"@types/node": "^22.0.0",
 		"@types/node-fetch": "^2.6.12",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.8.3"
