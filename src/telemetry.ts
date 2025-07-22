@@ -1,4 +1,4 @@
-import { SeverityNumber, logs } from "@opentelemetry/api-logs";
+import { logs, SeverityNumber } from "@opentelemetry/api-logs";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
 
 import { OTLPMetricExporter } from "@opentelemetry/exporter-metrics-otlp-grpc";

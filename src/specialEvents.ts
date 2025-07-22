@@ -1,4 +1,4 @@
-import { SeverityNumber, logs } from "@opentelemetry/api-logs";
+import { logs, SeverityNumber } from "@opentelemetry/api-logs";
 import { todayDate } from "./utils";
 
 const logger = logs.getLogger("special-events", "1.0.0");
