@@ -1,5 +1,5 @@
 # Use specific node version with slim base
-FROM node:24.12.0-bookworm-slim@sha256:b83af04d005d8e3716f542469a28ad2947ba382f6b4a76ddca0827a21446a540 AS base
+FROM node:24.12.0-bookworm-slim@sha256:7326fb2dbdce998edd72140946851be64ef4a643e8715e138ca467e8e9d92c99 AS base
 # Set environment variables
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH" \
