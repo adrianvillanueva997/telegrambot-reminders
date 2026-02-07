@@ -1,4 +1,4 @@
-name: Build and push Docker image to GitHub Packages and create release
+name: Build and push Docker image to GitHub Packages and create release with tag
 
 on:
   push:
