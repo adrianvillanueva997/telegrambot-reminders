@@ -21,7 +21,7 @@ function getSpecialMessage(): Record<number, Record<number, string>> {
 			7: "Felicidades @JoseAwe! 🎉 ¡Que tu cumpleaños dure más que el mes de febrero!",
 			12: "Felicidades a la madre de @dvdgg",
 			14: "Sam va Lentin llegó",
-			26: "Felicidades @thedrvd! 🎉 ¡Sigue siendo tan fabuloso como siempre!",
+			26: "Felicidades @thedrvd! 🎉 Que dures mas que una partida de Smash",
 		},
 		3: {
 			// Marzo
@@ -32,16 +32,16 @@ function getSpecialMessage(): Record<number, Record<number, string>> {
 		4: {
 			// Abril
 			1: "Abril con lluvias y más de una broma, pero tranquilo, la primavera te corona 🌸",
-			20: "¡Feliz día de los porros! 🌿 Si ves unicornios, no es culpa mía 🦄",
+			20: "¡Feliz día de los porros! 🌿 Esto no sube... 🦄",
 		},
 		5: {
 			// Mayo
 			1: "En mayo las flores están de fiesta, y la alergia te invita a una siesta 🤧",
 			4: "Felicidades @R3DMSR, y que la fuerza te acompañe hoy y siempre 🎉",
 			6: "Felicidades @DoctorMckay 🎉 ¡Que tu día sea más épico que una película de Marvel!",
-			8: "Hoy es el día de Motorhead 🤘, ¡así que a romper cuellos con buen metal!",
+			8: "Feliz dia de Motorhead, jack daniels & coke a vuestra salud",
 			9: "Felicidades @Thexiao77 y feliz Día de la Victoria 🎉 ¡Brindemos con vodka camarada! 🍸",
-			25: "Felicidades @Garfu01 <3 ¡Hoy eres más irresistible que un meme viral!",
+			25: "Felicidades @Garfu01 <3 Te como la carita a besos guapeton",
 		},
 		6: {
 			// Junio
@@ -50,19 +50,19 @@ function getSpecialMessage(): Record<number, Record<number, string>> {
 		7: {
 			// Julio
 			1: "En julio el sol quema fuerte, y el aire acondicionado es nuestra suerte 🥵",
-			8: "Felicidades @sanz97xx! 🎉 ¡Que tu día sea tan épico como tus errores matematicos!",
-			20: "¡Feliz día del amigo! (Si tienes uno, claro) 😜",
+			8: "Felicidades @sanz97xx! 🎉 ¡Ve al medico a mirarte la tension que tana sal no es buena!",
+			20: "¡Feliz día del amigo! (Si tienes uno, claro)",
 		},
 		8: {
 			// Agosto
 			1: "Agosto está aquí, con calor a morir, ¡pero no te derritas en tu porvenir! 🌞",
-			2: "Felicidades al más guapo y seductor, @Sauturn 🎉 ¡No sabemos cómo lo haces, pero lo haces bien!",
+			2: "Felicidades al más guapo, seductor y al que la tiene mas grande de este grupo, @Sauturn 🎉 ¡No sabemos cómo lo haces, pero lo haces bien!",
 		},
 		9: {
 			// Septiembre
 			1: "Se acabó la playita, septiembre te obliga a ponerte la ropita 😢",
 			11: "Felicidades torres gemelas 🎉 ¡Que no te derrumbes este año!",
-			15: "Felicidades @CecilioGil 🎉 ¡Que tu día sea tan legendario como tú!",
+			15: "Felicidades @CecilioGil 🎉 ¡Ese pelo te va a durar cada vez menos!",
 		},
 		10: {
 			// Octubre
