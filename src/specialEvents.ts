@@ -17,8 +17,9 @@ function getSpecialMessage(): Record<number, Record<number, string>> {
 		},
 		2: {
 			// Febrero
-			1: "Febrero viene corto pero intenso, ¡ponte romántico o vas al censo! ❤️",
+			1: "Febrero viene corto pero intenso, ¡ponte romántico o vas al censo! ❤",
 			7: "Felicidades @JoseAwe! 🎉 ¡Que tu cumpleaños dure más que el mes de febrero!",
+			12: "Felicidades a la madre de @dvdgg",
 			14: "Sam va Lentin llegó",
 			26: "Felicidades @thedrvd! 🎉 ¡Sigue siendo tan fabuloso como siempre!",
 		},
@@ -68,7 +69,7 @@ function getSpecialMessage(): Record<number, Record<number, string>> {
 			1: "💀 SpookTober 💀 Octubre te asusta, pero el dulce es quien te gusta 🍬",
 			5: "Felicidades al crack @DavasJoe 🎉 ¡Eres el mas grande, fiera, monstro, mastodonte y tal!",
 			7: "Felicidades @txc450 🎉 ¡El más tranquilo, aunque tu estrés diga lo contrario!",
-			12: "🇪🇸 ¡Feliz día de la Hispanidad! 🇪🇸 Y a Andres(blu), que no tiene @, también 🎉",
+			12: "🇪 ¡Feliz día de la Hispanidad! 🇪 Y a Andres(blu), que no tiene @, también 🎉",
 			16: "Felicidades @DarkTrainer 🎉 ¡Eres tan calvo y peludo como nunca!",
 			31: "Feliz Halloween 🎃",
 		},
