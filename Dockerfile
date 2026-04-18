@@ -1,4 +1,4 @@
-FROM oven/bun:1.3.12-debian AS base
+FROM oven/bun:1.3.12-debian@sha256:1b709c9dd883fc1af38c210f7ea5222c552a8d470ea73efbd4b8fcfee798a64b AS base
 
 ENV TZ="Europe/Madrid"
 WORKDIR /app
