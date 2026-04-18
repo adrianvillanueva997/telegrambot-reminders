@@ -1,6 +1,6 @@
 services:
   bot:
-    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:latest@sha256:0727db284939819597fb6198ed008eedf25d37082fdaf17f12566b537fbcab1a
+    image: ghcr.io/adrianvillanueva997/telegrambot-reminders:latest@sha256:b67e40177c3a6b3d0e77ffa2d77e67fde0fabf15f0c40ff6f9cb2b7ae6f9f72e
     networks:
       - otlp
     container_name: telegrambot_reminders
