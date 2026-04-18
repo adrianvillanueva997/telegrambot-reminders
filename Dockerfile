@@ -1,11 +1,8 @@
-# Use specific node version with slim base
-FROM node:24.13.1-bookworm-slim@sha256:a81a03dd965b4052269a57fac857004022b522a4bf06e7a739e25e18bce45af2 AS base
-# Set environment variables
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH" \
-  TZ="Europe/Madrid"
+FROM oven/bun:1.3.12-debian AS base
 
-# Install system dependencies
+ENV TZ="Europe/Madrid"
+WORKDIR /app
+
 RUN apt-get update && \
   apt-get install --no-install-recommends -y \
   ca-certificates \
@@ -15,37 +12,18 @@ RUN apt-get update && \
   ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
   echo $TZ > /etc/timezone
 
-# Enable pnpm
-RUN corepack enable
-
-# Set working directory
-WORKDIR /app
-
-# Production dependencies stage
-FROM base AS prod-deps
-COPY package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-  pnpm install --prod --frozen-lockfile
-
-# Build stage
 FROM base AS build
-COPY package.json pnpm-lock.yaml ./
+COPY package.json bun.lock* ./
 COPY tsconfig.json ./
 COPY src/ src/
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-  pnpm install --frozen-lockfile && \
-  pnpm run build
+RUN bun install && bun run build
 
-# Production stage
 FROM base AS prod
-COPY package.json ./
-COPY --from=prod-deps /app/node_modules ./node_modules
+COPY package.json bun.lock* ./
 COPY --from=build /app/dist ./dist
+RUN bun install --prod
 
-RUN chown -R node:node /app
+RUN chown -R bun:bun /app
+USER bun
 
-# Run as non-root user
-USER node
-
-# Command to run the application
-CMD ["pnpm", "start"]
+CMD ["bun", "run", "start"]
