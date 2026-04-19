@@ -8,11 +8,11 @@
 		"node": ">=16.0.0"
 	},
 	"scripts": {
-		"start": "node dist/main.js",
-		"build": "tsc",
-		"dev": "ts-node src/main.ts",
+		"start": "bun run dist/main.js",
+		"build": "bun tsc",
+		"dev": "bun run src/main.ts",
 		"clean": "rm -rf dist",
-		"prebuild": "npm run clean",
+		"prebuild": "bun run clean",
 		"lint": "biome check .",
 		"format": "biome format . --write"
 	},
@@ -46,7 +46,6 @@
 		"@biomejs/biome": "2.4.2",
 		"@types/node": "^24.0.0",
 		"@types/node-fetch": "^2.6.12",
-		"ts-node": "^10.9.2",
 		"typescript": "^5.8.3"
 	}
 }

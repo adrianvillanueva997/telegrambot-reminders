@@ -4,18 +4,27 @@
     "config:recommended",
     "group:allNonMajor",
     "docker:pinDigests",
-    "helpers:pinGitHubActionDigests"
+    "helpers:pinGitHubActionDigests",
+    "schedule:weekends"
   ],
-  "dependencyDashboard": false, 
+  "dependencyDashboard": false,
   "assignees": ["adrianvillanueva997"],
-  "recreateWhen": "auto",
   "labels": ["dependencies", "renovate"],
-  "automerge": true, // Enable automerge
-  "automergeType": "pr", 
+  "automerge": {
+    "enabled": true,
+    "method": "squash"
+  },
+  "major": {
+    "automerge": false
+  },
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+      "matchPackageNames": ["bun"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["@types/node", "typescript"],
+      "groupName": "type-tools"
     }
   ]
 }
