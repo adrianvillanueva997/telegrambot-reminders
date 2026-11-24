@@ -19,10 +19,6 @@
   },
   "packageRules": [
     {
-      "matchPackageNames": ["bun"],
-      "enabled": false
-    },
-    {
       "matchPackageNames": ["@types/node", "typescript"],
       "groupName": "type-tools"
     }

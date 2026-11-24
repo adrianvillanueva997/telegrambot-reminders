@@ -7,6 +7,7 @@ repos:
     hooks:
       - id: check-yaml
         name: ⚙️ Check YAML
+        args: [--allow-multiple-documents]
       - id: check-toml
         name: ⚙️ Check TOML
       - id: end-of-file-fixer
@@ -30,8 +31,23 @@ repos:
       - id: hadolint
         name: 🐳 Lint Dockerfiles
 
-  - repo: https://github.com/biomejs/pre-commit
-    rev: "v0.4.0" # Use the sha / tag you want to point at
+  - repo: local
     hooks:
-      - id: biome-check
-        name: 🌿 Biome check
+      - id: lint
+        name: Biome and Oxlint
+        entry: pnpm lint
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: format-check
+        name: Oxfmt
+        entry: pnpm format:check
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: typecheck
+        name: TypeScript
+        entry: pnpm exec tsc --noEmit
+        language: system
+        pass_filenames: false
+        always_run: true

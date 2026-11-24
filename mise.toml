@@ -1,2 +1,4 @@
 [tools]
-bun = "latest"
+node = "26.13.1"
+pnpm = "12.21.0"
+prek = "0.5.5"
