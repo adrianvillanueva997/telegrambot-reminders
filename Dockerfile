@@ -2,6 +2,7 @@ FROM node:26.13.1-bookworm-slim AS base
 
 ENV TZ="Europe/Madrid"
 WORKDIR /app
+COPY mise.toml ./
 
 RUN apt-get update && \
   apt-get install --no-install-recommends -y \
@@ -11,7 +12,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/* && \
   ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
   echo $TZ > /etc/timezone && \
-  npm install --global pnpm@12.21.0
+  PNPM_VERSION="$(awk -F '"' '/^pnpm = / {print $2}' mise.toml)" && \
+  test -n "$PNPM_VERSION" && \
+  npm install --global "pnpm@$PNPM_VERSION"
 
 FROM base AS build
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
