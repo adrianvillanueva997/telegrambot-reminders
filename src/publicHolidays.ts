@@ -104,36 +104,33 @@ async function getSpanishPublicHolidayTelegram(): Promise<string | null> {
 	if (!response.ok) return null;
 
 	const holidays: IBaseHoliday = await response.json();
-	const tomorrow_holidays: IHoliday[] = holidays.filter(
-		(x) => x.startDate === `${year}-${month}-${day}`,
+	const tomorrow = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+	const tomorrow_holidays = holidays.filter(
+		(holiday) => holiday.startDate === tomorrow,
 	);
 
-	if (tomorrow_holidays.length === 0) return null;
-
-	const holiday = tomorrow_holidays[0];
-
-	if (holiday.nationwide === true) {
+	const flatProvinces = flattenProvinces(provinces);
+	const messages = tomorrow_holidays.flatMap((holiday) => {
 		const holidayName = escapeMarkdownV2(capitalize(holiday.name[0].text));
-		return `📅 *Mañana es ${holidayName}*\n\n🔔 Acuérdate de quitar la alarma 🙏`;
-	}
-
-	if (holiday.subdivisions && holiday.subdivisions.length > 0) {
-		const flatProvinces = flattenProvinces(provinces);
+		if (holiday.nationwide) {
+			return [
+				`📅 *Mañana es ${holidayName}*\n\n🔔 Acuérdate de quitar la alarma 🙏`,
+			];
+		}
 
 		const affected_regions = flatProvinces.filter((province) =>
-			holiday.subdivisions.some((sub) => sub.code === province.code),
+			holiday.subdivisions?.some((sub) => sub.code === province.code),
 		);
+		if (affected_regions.length === 0) return [];
 
-		if (affected_regions.length > 0) {
-			const regionNames = affected_regions.map((region) => region.name[0].text);
-			const regionsText = formatRegionListTelegram(regionNames);
-			const holidayName = escapeMarkdownV2(capitalize(holiday.name[0].text));
+		const regionNames = affected_regions.map((region) => region.name[0].text);
+		const regionsText = formatRegionListTelegram(regionNames);
+		return [
+			`📅 *Mañana es ${holidayName}* en ${regionsText}\n\n🔔 Acuérdate de quitar la alarma 🙏`,
+		];
+	});
 
-			return `📅 *Mañana es ${holidayName}* en ${regionsText}\n\n🔔 Acuérdate de quitar la alarma 🙏`;
-		}
-	}
-
-	return null;
+	return messages.length > 0 ? messages.join("\n\n") : null;
 }
 
 export { getSpanishPublicHolidayTelegram };
