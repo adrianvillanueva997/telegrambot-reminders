@@ -37,10 +37,7 @@ import { initTelemetry } from "./telemetry";
 				body: "Running Thursday scheduled job",
 				attributes: { "log.type": "cron" },
 			});
-			await bot.telegram.sendMessage(
-				telegramGroupId,
-				"Feliz jueves! 🐸",
-			);
+			await bot.telegram.sendMessage(telegramGroupId, "Feliz jueves! 🐸");
 		},
 		null,
 		false,
@@ -56,13 +53,9 @@ import { initTelemetry } from "./telemetry";
 				body: "Running Public Holidays scheduled job",
 				attributes: { "log.type": "cron" },
 			});
-			const public_holiday =
-				await getSpanishPublicHolidayTelegram();
+			const public_holiday = await getSpanishPublicHolidayTelegram();
 			if (public_holiday !== null)
-				await bot.telegram.sendMessage(
-					telegramGroupId,
-					public_holiday,
-				);
+				await bot.telegram.sendMessage(telegramGroupId, public_holiday);
 		},
 		null,
 		false,
@@ -81,10 +74,7 @@ import { initTelemetry } from "./telemetry";
 
 			const specialEvent = getSpecialEvents();
 			if (specialEvent) {
-				await bot.telegram.sendMessage(
-					telegramGroupId,
-					specialEvent,
-				);
+				await bot.telegram.sendMessage(telegramGroupId, specialEvent);
 			}
 		},
 		null,

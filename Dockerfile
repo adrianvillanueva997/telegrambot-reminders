@@ -1,7 +1,8 @@
-FROM oven/bun:1.3.12-debian@sha256:1b709c9dd883fc1af38c210f7ea5222c552a8d470ea73efbd4b8fcfee798a64b AS base
+FROM node:26.13.1-bookworm-slim AS base
 
 ENV TZ="Europe/Madrid"
 WORKDIR /app
+COPY mise.toml ./
 
 RUN apt-get update && \
   apt-get install --no-install-recommends -y \
@@ -10,20 +11,24 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
   ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
-  echo $TZ > /etc/timezone
+  echo $TZ > /etc/timezone && \
+  PNPM_VERSION="$(awk -F '"' '/^pnpm = / {print $2}' mise.toml)" && \
+  test -n "$PNPM_VERSION" && \
+  npm install --global "pnpm@$PNPM_VERSION"
 
 FROM base AS build
-COPY package.json bun.lock* ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY tsconfig.json ./
 COPY src/ src/
-RUN bun install && bun run build
+RUN pnpm build
 
 FROM base AS prod
-COPY package.json bun.lock* ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --prod --frozen-lockfile
 COPY --from=build /app/dist ./dist
-RUN bun install --prod
 
-RUN chown -R bun:bun /app
-USER bun
+RUN chown -R node:node /app
+USER 1000:1000
 
-CMD ["bun", "run", "start"]
+CMD ["node", "dist/main.js"]

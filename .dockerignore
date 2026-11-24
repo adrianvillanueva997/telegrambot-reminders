@@ -1,3 +1,6 @@
 .venv
+node_modules
+dist
+.git
 audio.ogg
 audio.wav
